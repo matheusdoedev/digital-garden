@@ -140,4 +140,80 @@ y in x # True
     <li>The <strong>capitalize</strong> method is like title except that it considers the entire string to be a word</li>
 </ul>
 
+### Count
+
+<ul>
+    <li>returns the number of the specified substrings in the string.</li>
+</ul>
+
+```sh
+>>> s = 'Hello, world'
+
+>>> s.count('o') # print the number of 'o's in 'Hello, World'
+2
+```
+
+<ul>
+    <li><em>.count() is case-sensitive, so this example will only count the number of lowercase letter 'o's.</em></li>
+</ul>
+
+```sh
+>>> s = 'HELLO, WORLD'
+
+>>> s.count('o') # print the number of 'o's in 'Hello, World'
+0
+```
+
+### strip, rstrip, lstrip
+
+<ul>
+    <li>
+        returns a copy of the string with the leading (lstrip) and trailing (rstrip) whitespace removes both
+    </li>
+</ul>
+
+```sh
+>>> s = '\t Hello, world\n\t'
+
+>>> print s Hello, world
+
+>>> print s.strip() Hello, world
+
+>>> print s.lstrip() Hello,world
+```
+
+<ul>
+    <li>Note the leading and trailing tabs and newlines</li>
+    <li>Strip methods can balso be used to remove other types of characters</li>
+</ul>
+
+```sh
+import string
+
+s = 'www.wikibooks.org'
+
+print s
+
+print s.strip('w') # Removes all w's from outside print
+s.strip(string.lowercase) # Removes all lowercase letters from outsize print
+s.strip(string.printable) # Removes all printable characters
+
+Outputs:
+www.wikibooks.org  .wikibooks.org  .wikibooks.
+```
+
+### ljust, rjust, center
+
+<ul>
+    <li>left, right or center justifies a string into a given field size (the rest is padded with spaces)</li>
+</ul>
+
+```sh
+>>> s = 'foo'
+
+>>> s'foo'
+
+>>> s.ljust(7)'foo
+```
+
 ## Resources
