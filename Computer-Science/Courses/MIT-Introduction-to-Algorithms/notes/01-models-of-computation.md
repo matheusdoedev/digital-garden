@@ -1,4 +1,4 @@
-# Model of Computation
+# Models of Computation
 
 ## What is an Algorithm?
 
@@ -43,8 +43,48 @@
     </li>
 </ul>
 
+## Pointer Machine
+
+- dynamically allocated objects (namedtuple)
+- object has O(1) fields
+- field = word (e.g., int) or pointer to object/null (a.k.a. reference)
+- weaker than (can be implemented on) RAM
+
+## Python Model
+
+- Python lets you use either mode of thinking
+
+  1. "list" is actually an array -> RAM
+
+  ```py
+      L[i] = L[j] + 5 -> O(1) time
+  ```
+
+  2. object with O(1) attributes (including references) -> pointer machine
+
+  ```py
+      x = x.next -> O(1) time
+  ```
+
+- Python has many other operations. To determine their cost, imagine implementation in terms of (1) or (2):
+
+  1. list
+
+  ```py
+  (a) L.append(x) -> O(1) time
+  ```
+
+  ```
+  (b) L = L1 + L2 === L = [] -> O(1)
+      (O(1+|L1|+|L2|)time)
+
+            for x in L1:
+                L.append(x) -> O(1)
+
+            for x in L2:
+                L.append(x) -> O(1)
+  ```
+
 ## Resources
 
-<ul>
-    <li><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/lecture-videos/MIT6_006F11_lec02.pdf">Lecture 2: Models of Computation</a></li>
-</ul>
+- [Lecture 2: Models of Computation](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/lecture-videos/MIT6_006F11_lec02.pdf)
