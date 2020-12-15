@@ -35,3 +35,5 @@
 </ul>
 
 ### Resources
+
+- [Python Programming, Wikibooks](https://upload.wikimedia.org/wikipedia/commons/9/91/Python_Programming.pdf)

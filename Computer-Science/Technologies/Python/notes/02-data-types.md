@@ -67,3 +67,7 @@
     <li>The Python analogue of null pointer known from other programming languages is <em>None</em>,</li>
     <li><em>None</em> is not a null pointer or a null reference but an actual object of which there is only one instance</li>
 </ul>
+
+## Resources
+
+- [Python Programming, Wikibooks](https://upload.wikimedia.org/wikipedia/commons/9/91/Python_Programming.pdf)

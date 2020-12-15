@@ -216,4 +216,34 @@ www.wikibooks.org  .wikibooks.org  .wikibooks.
 >>> s.ljust(7)'foo
 ```
 
+### join
+
+- Joins together the given sequence with the string as separator
+
+```py
+''.join(seq) # '1 2 3 4 5'
+
+'+'.join(seq) # '1+2+3+4+5'
+
+''.join(map(str,seq)) # '1 2 3 4 5'
+```
+
+### find, index, rfind, rindex
+
+- The find and index methods return the index of the first found occurrence of the given subsequence. If it is not found, find returns -1 but index raises a ValueError.
+- rfind and rindex are the same as find and index except that they search through the string from right to left (i.e. they find the last occurrence)
+
+```py
+>>> s.find('l') 2]
+>>> s[s.index('l'):]
+'llo, world'
+>>> s.rfind('l') 10
+>>> s[:s.rindex('l')]
+'Hello, wor'
+>>> s[s.index('l'):s.rindex('l')]
+'llo, wor'
+```
+
 ## Resources
+
+- [Python Programming, Wikibooks](https://upload.wikimedia.org/wikipedia/commons/9/91/Python_Programming.pdf)
