@@ -24,6 +24,14 @@ def print_lyrics():
 - Each function is represented by a **frame**.
 - A frame is a box with the name of a function beside it and the parameters and variables of the function inside it.
 
+## Encapsulation
+
+- Wrapping a piece of code up in a function is called **encapsulation**.
+
+## Interface
+
+- The **interface** of a function is a summary of how it is used: what are the parameters? what does the function do? and what is the return value?
+
 ## Resources
 
 - [Think Python: How to think like a Computer Scientist](http://www.greenteapress.com/thinkpython/html/index.html)
