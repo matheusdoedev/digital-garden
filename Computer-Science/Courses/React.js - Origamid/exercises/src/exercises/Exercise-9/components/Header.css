@@ -1,0 +1,18 @@
+.header-wrapper {
+  padding: 25px;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 36px;
+}
+
+.header-nav a {
+  padding: 10px;
+  margin-left: 16px;
+  font-weight: 500;
+}
+
+.header-nav a:hover {
+  color: #41423d;
+}

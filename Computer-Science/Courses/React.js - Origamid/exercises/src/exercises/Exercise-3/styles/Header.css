@@ -1,0 +1,8 @@
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.container a {
+  margin-left: 25px;
+}

@@ -1,0 +1,13 @@
+.radio-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio {
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+
+.inativo {
+  display: none;
+}

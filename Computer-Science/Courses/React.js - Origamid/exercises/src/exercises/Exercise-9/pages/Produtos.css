@@ -1,0 +1,10 @@
+.produtos-wrapper {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 67px 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 1.25rem;
+  row-gap: 1.25rem;
+}

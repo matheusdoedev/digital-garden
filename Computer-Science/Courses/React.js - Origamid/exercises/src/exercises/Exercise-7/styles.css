@@ -1,0 +1,20 @@
+.container {
+  max-width: 1180px;
+  display: flex;
+  justify-content: center;
+}
+
+.container label,
+.container input {
+  display: block;
+}
+
+.container label {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.container input {
+  margin-bottom: 41px;
+  width: 200px;
+}
