@@ -1,6 +1,7 @@
 # Python
 
 - High level language
+- Interpreted language
 
 ## Resources
 
