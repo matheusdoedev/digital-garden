@@ -1,7 +1,8 @@
-# Python
+# Iteration
 
-- High level language
-- Interpreted language
+## Algorithms
+
+- It is a mechanical process for solving a category of problems (in this case, computing square roots)
 
 ## Resources
 
