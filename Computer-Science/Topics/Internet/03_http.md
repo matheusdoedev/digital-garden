@@ -23,6 +23,76 @@
 1. For each element needed, the browser makes additional connections and HTTP requests to the server for each element.
 1. When the browser has finished loading all images, applets, etc. the page will be completely loaded in the browser window.
 
+### What is HTTPS
+
+- **Hyper Text Transfer Protocol Secure**
+- Data sent is encrypted by SSL or **Secure Sockets Layer**, and TLS or **Transport Secure Layer**
+
+### HTTP Methods
+
+- **GET** - Retrieves data from the server
+- **POST** - Submit data to the server
+- **PUT** - Update data already on the server
+- **DELETE** - Deletes data from the server
+
+### HTTP Header Fields
+
+#### General
+
+- Request URL
+- Request Method
+- Status Code
+- Remote Address
+- Referrer Policy
+
+#### Response
+
+- Server
+- Set-Cookie
+- Content-Type
+- Content-Length
+- Date
+
+#### Request
+
+- Cookies
+- Accept-xxx
+- Content-Type
+- Content-Length
+- Authorization
+- User-Agent
+- Referrer
+
+### HTTP Status Codes
+
+- **1xx: Informational** - Request recieved / processing
+- **2xx: Success** - Successfully recieved, understood and accepted
+- **3xx: Redirect** - Further action must be taken / redirect
+- **4xx: Client Error** - Request does not have what it needs
+- **5xx: Server Error** - Server failed to fulfil an apparent valid request
+
+#### Most commom
+
+|     |                               |
+| --- | ----------------------------- |
+| 200 | OK                            |
+| 201 | OK created                    |
+| 301 | Moved to new URL              |
+| 304 | Not modified (Cached version) |
+| 400 | Bad request                   |
+| 401 | Unauthorized                  |
+| 404 | Not found                     |
+| 500 | Internal server error         |
+
+### HTTP/2
+
+- Major revision of HTTP
+- Under the hood changes
+- Respond with more data
+- Reduce latency by enabling full request and response multiplexing
+- Fast, efficient & secure
+
 ## Resources
 
 - [How Does the Internet Work?, Stanford at stanford.edu](https://web.stanford.edu/class/msande91si/www-spr04/readings/week1/InternetWhitepaper.htm)
+- [HTTP Crash Course, Traversy Media on Youtube](https://www.youtube.com/watch?v=iYM2zFP3Zn0&t=803s)
