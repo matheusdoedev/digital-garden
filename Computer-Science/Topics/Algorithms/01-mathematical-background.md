@@ -2,7 +2,7 @@
 
 ## Asymptotic Notation
 
-- In addition to correctness another important characteristi of a useful algorithm is its time and memory consumption.
+- In addition to correctness another important characteristic of a useful algorithm is its time and memory consumption.
 - Time and memory are both valuable resources and there are important differences in how we can use them.
 
 ```
