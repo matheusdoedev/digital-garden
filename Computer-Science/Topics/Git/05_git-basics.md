@@ -320,20 +320,6 @@ $ git restore --staged <file>
 $ git restore <file>
 ```
 
-## Working with Remotes
-
-- Remote repositories are versions of your project that are hosted on the Internet or network somewhere.
-- It is entirely possible that you can be working with a "remote" repository that is, in fact, on the same host you are. The word "remote" does not necessarily is somewhere else on the network or Internet, only that it is elsewhere.
-
-### Showing Your Remotes
-
-- To se which remote servers you have configured, you can run the `git remote` command. It lists the shortnames of each remote handle you've specified.
-- You can also specify `-v`, which shows you the URLs that Git has stored for the shortname to be used when reading and writing for that remote:
-
-```zsh
-$ git remote -v
-```
-
 ## Resources
 
 - ["Pro Git" book, by Scott Chacon and Ben Straub](https://git-scm.com/book/en/v2)
