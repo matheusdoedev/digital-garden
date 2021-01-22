@@ -90,3 +90,36 @@ true
 iex> :apple == :orange
 false
 ```
+
+- Often they are used to express the state of an operation, by using values such as :ok and :error
+- The booleans `true` and `false` are also atoms:
+
+```exs
+iex> true == :true
+true
+
+iex> is_atom(false)
+true
+
+iex> is_boolean(:false)
+true
+```
+
+- Elixir allows you to skip the leading `:` for the atoms `false`, `true` and `nil`
+
+## Strings
+
+- Strings in Elixir are delimited by double quotes, and they are encoded in UTF-8
+
+```exs
+iex> "hello"
+"hello"
+```
+
+- Elixir also supports string interpolation
+
+```exs
+iex> string = :world
+iex> "hello #{string}"
+"hello world"
+```

@@ -4,25 +4,19 @@
 
 ### Model
 
-<ul>
-    <li>Responsible for represent your data</li>
-    <li>Responsible for managing your data (saving, fetching, etc)</li>
-    <li>Doesn't matter if you manage data in memory, files or databases</li>
-    <li>Contains data-related logic</li>
-</ul>
+- Responsible for represent your data
+- Responsible for managing your data (saving, fetching, etc)
+- Doesn't matter if you manage data in memory, files or databases
+- Contains data-related logic
 
 ### View
 
-<ul>
-    <li>What the users sees</li>
-    <li>Shouldn't contain too much logic</li>
-</ul>
+- What the users sees
+- Shouldn't contain too much logic
 
 ### Controller
 
-<ul>
-    <li>Connecting your Models and your Views</li>
-    <li>Contains the "in-between" logic</li>
-    <li>Should only make sure that the two can communicate (in both directions)</li>
-    <li>Split across middlewares functions</li>
-</ul>
+- Connecting your Models and your Views
+- Contains the "in-between" logic
+- Should only make sure that the two can communicate (in both directions)
+- Split across middlewares functions
