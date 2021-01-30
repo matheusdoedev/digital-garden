@@ -49,4 +49,42 @@ $ git checkout <branchname>
 $ git log <branchname>
 ```
 
+- Because a branch in Git is actually a simple file that contains the 40 character SHA-1 checksum of the commit it points to, branches are cheap create and destroy. Creating a new branch is as quick and simple as writing.
+- This is in sharp contrast to the way most older VCS tools branch, which involves copying all of the project's files into a second directory. This can take several seconds or even minutes, depending on the size of the project, whereas in Git the process is always instantaneous.
+- Also because we're recording the parents when we commit, finding a proper merge base for merging is automatically done for us and is generally very easy to do.
+
 - To show all of the branches, add --all to your git log command
+
+## Creating a new branch and switching to it at the same time
+
+```zsh
+$ git checkout -b <newbranchname>
+```
+
+- From Git version 2.23 onwards you can use `git switch` instead of git checkout to:
+  1. Switch to an existing branch: `git switch testing-branch`
+  1. Create a new branch and switch to it: `git switch -c newbranc`. The -c flag stands for create, you can also use the full flag: `--create`.
+  1. Return to your previously checked out branch: `git switch -`
+
+## Merging
+
+### git merge
+
+```zsh
+$ git merge <branchname>
+```
+
+### Fast-forward merge
+
+- When the commit pointed by the branch merged as directly ahead of the commit that HEAD is pointing, Git simply moves the pointer forward.
+
+### Deleting branch
+
+```zsh
+$ git branch -d <branchname>
+```
+
+### Recursively merge
+
+- When the commit on the branch that is merged is not ahead of a direct ancestor of the branch that is merging in, Git does a simple three-way merge, using the two snapshots pointed to by the branch tips and the commom ancestor of the two.
+- Instead of just moving the branch pointer forward, Git creates a new snapshot that result from this three-way merge and automatically creates a new commit that points to it. This is referred to as a merge commit, and is special in that it has more than one parent.
