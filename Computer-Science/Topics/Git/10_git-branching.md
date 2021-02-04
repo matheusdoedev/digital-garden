@@ -88,3 +88,7 @@ $ git branch -d <branchname>
 
 - When the commit on the branch that is merged is not ahead of a direct ancestor of the branch that is merging in, Git does a simple three-way merge, using the two snapshots pointed to by the branch tips and the commom ancestor of the two.
 - Instead of just moving the branch pointer forward, Git creates a new snapshot that result from this three-way merge and automatically creates a new commit that points to it. This is referred to as a merge commit, and is special in that it has more than one parent.
+
+## Resources
+
+- ["Pro Git" book, by Scott Chacon and Ben Straub](https://git-scm.com/book/en/v2)

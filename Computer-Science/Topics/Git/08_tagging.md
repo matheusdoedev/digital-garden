@@ -118,3 +118,7 @@ $ git switch -
 ```zsh
 $ git checkout -b version2 v2.0.0
 ```
+
+## Resources
+
+- ["Pro Git" book, by Scott Chacon and Ben Straub](https://git-scm.com/book/en/v2)

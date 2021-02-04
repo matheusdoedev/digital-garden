@@ -19,3 +19,7 @@ $ git config --global alias.unstage 'reset HEAD --'
 ```zsh
 $ git config --global alias.visual '!gitk"
 ```
+
+## Resources
+
+- ["Pro Git" book, by Scott Chacon and Ben Straub](https://git-scm.com/book/en/v2)
