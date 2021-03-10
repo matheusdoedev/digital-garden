@@ -27,7 +27,7 @@ $ git branch testing
 
 - The Git branch command only _created_ a new branch - it didn't switch to that branch.
 
-- To se where the HEAD pointer is:
+- To see where the HEAD pointer is:
 
 ```zsh
 $ git log --oneline --decorate

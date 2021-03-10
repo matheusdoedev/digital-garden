@@ -129,7 +129,7 @@ $ git log commit
 ```
 
 - One of the more helpful options is `-p` or `--patch`, which shows the difference (the patch output) introduced in each commit.
-- You can also liit the number of log entries displayed, such as using -2 to show only the last two entries.
+- You can also list the number of log entries displayed, such as using -2 to show only the last two entries.
 
 ```zsh
 $ git log -p -2

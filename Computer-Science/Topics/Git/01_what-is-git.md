@@ -10,7 +10,7 @@
 
 - Storing data as changes to a base version of each file Git doesn't think of store its data this way.
 - Instead, Git thinks of its data more like a series of snapshots of a miniature filesystem.
-- With Git, every time you commit, or sabe the state of your project, Git basically takes a picture of what all your files look like at that moment and stores a reference to that snapshot.
+- With Git, every time you commit, or save the state of your project, Git basically takes a picture of what all your files look like at that moment and stores a reference to that snapshot.
 - To be efficient, if files have not changed, Git doesn't store the file again, just a link to the previous identical file it has already stored.
 - Git thinks about its data more like a **stream of snapshots**.
 
