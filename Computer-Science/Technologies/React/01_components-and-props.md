@@ -22,3 +22,7 @@ class Welcome extends React.Component {
   }
 }
 ```
+
+## References
+
+- [React docs](https://reactjs.org/docs/handling-events.html)

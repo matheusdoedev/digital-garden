@@ -55,3 +55,7 @@ ReactDOM.render(element, document.getElementById("root"));
 ```
 
 - React elements are **immutable**. Once you create an element, you can't change its children or attributes.
+
+## References
+
+- [React docs](https://reactjs.org/docs/handling-events.html)

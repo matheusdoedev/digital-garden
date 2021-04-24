@@ -57,3 +57,7 @@ this.setState({ comment: "Hello" });
 ```
 
 - The only place where you can assign `this.state` is the constructor.
+
+## References
+
+- [React docs](https://reactjs.org/docs/handling-events.html)
