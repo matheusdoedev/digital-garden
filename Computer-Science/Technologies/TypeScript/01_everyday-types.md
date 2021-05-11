@@ -142,6 +142,197 @@ function printId(id: number | string) {
 }
 ```
 
+## Type Aliases
+
+- A _type alias_ is a name for any type.
+
+```ts
+type Point = {
+  x: number;
+  y: number;
+};
+
+// Exactly the same as the earlier example
+function printCoord(pt: Point) {
+  console.log("The coordinate's x value is " + pt.x);
+  console.log("The coordinate's y value is " + pt.y);
+}
+
+printCoord({ x: 100, y: 100 });
+```
+
+- You can actually use a type alias to give a name to any type at all, not just and object type.
+
+```ts
+type ID = number | string;
+```
+
+- Note that aliases are _only_ aliases - you cannot use type aliases to create different/distinct "versions" of the same type. When you use the alias, it's exactly as if you had written the aliased type.
+
+## Interfaces
+
+```ts
+interface Point {
+  x: number;
+  y: number;
+}
+
+function printCoord(pt: Point) {
+  console.log("The coordinate's x value is " + pt.x);
+  console.log("The coordinate's y value is " + pt.y);
+}
+
+printCoord({ x: 100, y: 100 });
+```
+
+- Just like when we used a type alias above, the example works just as if we had used an anonymous object type. TypeScript is only concerned with the _structure_ of the value we passed to `printCoord` - it only cares that it has the expected properties. Being concerned only with the structure and capabilites of types is why we call TypeScript a _structurally_ typed type system.
+
+### Differences Between Type Aliases and Interfaces
+
+- The key distinction is that a type cannot be re-opened to add new properties vs an interface which is always extendable.
+
+## Type Assertions
+
+- Sometimes you will have information about the type of a value that TypeScript can't know about. In this situation, you can use a _type assertion_ to specify a more specific type:
+
+```ts
+const myCanvas = document.getElementById("main_canvas") as HTMLCanvasElement;
+```
+
+- Like a type annotation, type assertions are removed by the compiler and won't affect the runtime behavior of your code.
+- You can also use the angle-bracket syntax (except if the code is in a `.tsx` file), which is equivalent
+
+```tsx
+const myCanvas = <HTMLCanvasElement>document.getElementById("main_canvas");
+```
+
+- TypeScript only allows type assertions which convert to a more specific or less specific version of a type. This rule prevents “impossible” coercions like
+
+```ts
+const x = "hello" as number;
+// Conversion of type 'string' to type 'number' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+```
+
+- Sometimes this rule can be too conservative and will disallow more complex coercions that might be valid. If this happens, you can use two assertions, first to any (or unknown, which we’ll introduce later), then to the desired type
+
+```ts
+const a = expr as any as T;
+```
+
+## Literal Types
+
+- In addition to the general `string` and `number`, we can refer to _specific_ strings and numbers in type positions.
+- One way to think about this is to consider how JavaScript comes with different ways to declare a variable. Both `var` and `let` allow for changing what is held inside the variable, **and `const` does not**. This is reflected in how TypeScript creates types for literals.
+
+```ts
+let changingString = "Hello World";
+changingString = "Olá Mundo";
+// Because `changingString` can represent any possible string, that
+// is how TypeScript describes it in the type system
+changingString;
+
+// let changingString: string;
+
+const constantString = "Hello World";
+// Because `constantString` can only represent 1 possible string, it
+// has a literal type representation
+constantString;
+
+// const constantString: "Hello World";
+```
+
+- It's not much use to have a variable that can only have one value. But by _combining_ literals into unions, you can express a much more useful concept - for example, functions that only accept a certain set of known values
+
+```ts
+function printText(s: string, alignment: "left" | "right" | "center") {
+  // ...
+}
+printText("Hello, world", "left");
+printText("G'day, mate", "centre");
+// Argument of type '"centre"' is not assignable to parameter of type '"left" | "right" | "center"'.
+```
+
+- Numeric literal types work the same way
+
+```ts
+function compare(a: string, b: string): -1 | 0 | 1 {
+  return a === b ? 0 : a > b ? 1 : -1;
+}
+```
+
+- You can combine these with non-literal types
+
+```ts
+interface Options {
+  width: number;
+}
+
+function configure(x: Options | "auto") {
+  // ...
+}
+
+configure({ width: 100 });
+configure("auto");
+configure("automatic");
+// Argument of type '"automatic"' is not assignable to parameter of type 'Options | "auto"'.
+```
+
+### Literal Inference
+
+- When you initialize a variable with an object, TypeScript assumes that the properties of that object might change values later.
+
+```ts
+const obj = { counter: 0 };
+
+if (someCondition) {
+  obj.counter = 1;
+}
+```
+
+- TypeScript doesn't assume the assignment of `1` to a field which previously had `0` is an error. Another way of saying this is that `obj.counter` must have the type `number`, not `0`,
+  because types are used to determine both _reading_ and _writing_ behavior.
+
+- The same applies to string:
+
+```ts
+const req = { url: "https://example.com", method: "GET" };
+handleRequest(req.url, req.method);
+// Argument of type 'string' is not assignable to parameter of type '"GET" | "POST"'.
+```
+
+- In the above example `req.method` is inferred to be `string`, not `"GET"`. Because code can be evaluated between the creation of req and the call of `handleRequest` which could assign a new string like `"GUESS"` to `req.method`, TypeScript considers this code to have an error.
+
+- There are two ways to work around this:
+
+  1. You can change the inference by adding a type assertion in either location:
+
+  ```ts
+  // Change 1:
+  const req = { url: "https://example.com", method: "GET" as "GET" };
+  // Change 2
+  handleRequest(req.url, req.method as "GET");
+  ```
+
+  2. You can use `as const` to convert the entire object to be type literals:
+
+  ```ts
+  const req = { url: "https://example.com", method: "GET" } as const;
+  handleRequest(req.url, req.method);
+  ```
+
+- The `as const` suffix acts like `const` but for the type system, ensuring that all properties are assigned the literal type instead of a more general version like `string` or `number`;
+
+### Non-null Assertion Operator (Postfix `!`);
+
+- TypeScript also has a special syntax for removing `null` and `undefined` from a type without doing any explicit checking. Writing `!` after any expression is effectively a type assertion that the value isn't `null` or `undefined`
+
+```ts
+function liveDangerously(x?: number | null) {
+  // No error
+  console.log(x!.toFixed());
+}
+```
+
 ## References
 
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/2/basic-types.html#emitting-with-errors)
