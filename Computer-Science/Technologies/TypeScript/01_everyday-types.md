@@ -333,6 +333,41 @@ function liveDangerously(x?: number | null) {
 }
 ```
 
+- Just like other type assertions, this doesn't change the runtime behavior of your code, so it's important to only use `!` when you known that the vlaue can't be `null` or `undefined`.
+
+## Enums
+
+- Enums are a feature added to JavaScript by TypeScript which allows for describing a value which could be one of a set of possible named constants.
+- Unlike most TypeScript features, this is not a type-level addition to JavaScript but something added to the language and runtime. Because of this, it’s a feature which you should know exists, but maybe hold off on using unless you are sure.
+
+## Less Common Primitives
+
+### `bigint`
+
+- Is a primitive in _JavaScript_ used for very large integers, `BigInt`
+
+```ts
+// Creating a bigint via the BigInt function
+const oneHundred: bigint = BigInt(100);
+
+// Creating a BigInt via the literal syntax
+const anotherHundred: bigint = 100n;
+```
+
+### symbol
+
+- Is a primitive in _JavaScript_ used to create a globally unique reference via the function `Symbol()`;
+
+```ts
+const firstName = Symbol("name");
+const secondName = Symbol("name");
+
+if (firstName === secondName) {
+  // This condition will always return 'false' since the types 'typeof firstName' and 'typeof secondName' have no overlap.
+  // Can't ever happen
+}
+```
+
 ## References
 
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/2/basic-types.html#emitting-with-errors)
