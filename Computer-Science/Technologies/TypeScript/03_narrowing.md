@@ -62,6 +62,70 @@ function printAll(strs: string | string[] | null) {
 }
 ```
 
+## Truthiness narrowing
+
+- In JavaScript, we can use any expression in conditionals, `&&`s, `||`s, `if` statements, and Boolean negations (`!`), and more. As an example, `if` statements don’t expect their condition to always have the type `boolean`.
+
+```ts
+function getUsersOnlineMessage(numUsersOnline: number) {
+  if (numUsersOnline) {
+    return `There are ${numUsersOnline} online now!`;
+  }
+  return "Nobody's here. :(";
+}
+```
+
+- In JavaScript, constructs like `if` first "coerce" their conditions to `boolean`s to make sense of them, and then choose their branches depending on wheter the result is `true` or `false`.
+
+- Values like `0`, `NaN`, `""` (the empty string), `0n` (the bigint version of zero), `null` and `undefined` all coerce to `false`, and other values get coerced true.
+
+- You can always coerce values to `boolean`s by running them through the `Boolean` function, or by using the shorter double-Boolean negation.
+
+```ts
+// both of these result in 'true'
+Boolean("hello");
+!!"world";
+```
+
+- It's fairly popular to leverage this behavior, especially for guardig against values like `null` or `undefined`.
+
+```ts
+function printAll(strs: string | string[] | null) {
+  if (strs && typeof strs === "object") {
+    for (const s of strs) {
+      console.log(s);
+    }
+  } else if (typeof strs === "string") {
+    console.log(strs);
+  }
+}
+```
+
+## Equality narrowing
+
+- TypeScript also uses `switch` statements and equality checks like `===`, `!==`, `==`, and `!=` to narrow types.
+
+```ts
+function example(x: string | number, y: string | boolean) {
+  if (x === y) {
+    // We can now call any 'string' method on 'x' or 'y'.
+    x.toUpperCase();
+
+(method) String.toUpperCase(): string
+    y.toLowerCase();
+
+(method) String.toLowerCase(): string
+  } else {
+    console.log(x);
+
+(parameter) x: string | number
+    console.log(y);
+
+(parameter) y: string | boolean
+  }
+}
+```
+
 ## References
 
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/2/basic-types.html#emitting-with-errors)
