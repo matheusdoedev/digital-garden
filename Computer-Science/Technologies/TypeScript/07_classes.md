@@ -115,7 +115,75 @@ class Point {
 }
 ```
 
-## Gettes / Setters
+## Getters / Setters
+
+```ts
+class C {
+  _length = 0;
+
+  get length() {
+    return this._length;
+  }
+
+  set length(value: number) {
+    this._length = value;
+  }
+}
+```
+
+- TypeScript has some special inference rules for accessors
+  - If `get` exists but not set, the property is automatically `readonly`
+  - If the type of the setter parameter is not specified, it is inferred form the return type of the getter
+  - Getters and setters must have the same Member Visibility.
+
+## Class Heritage
+
+- Like other languages with object-oriented feautres, classes in JavaScript can inherit from base classes.
+
+### `implements` Clauses
+
+- You can use an `implements` clause to check that a class satisfies a particular `interface`. An error will be issued if a class fails to correctly implement it.
+
+```ts
+interface Pingable {
+  ping(): void;
+}
+
+class Sonar implements Pingable {
+  ping() {
+    console.log("ping!");
+  }
+}
+
+class Ball implements Pingable {
+  // Class 'Ball' incorrectly implements interface 'Pingable'.
+  // Property 'ping' is missing in type 'Ball' but required in type 'Pingable'.
+  pong() {
+    console.log("pong!");
+  }
+}
+```
+
+#### Cautions
+
+- It's important to understand that an `implements` clause is only a check that the class can be treated as the interface type. It doesn't change the type of the class or its methods _at all_. A commom source of error is to assume that an `implements` clause will change the class type - it doesn't!
+
+```ts
+interface Checkable {
+  check(name: string): boolean;
+}
+
+class NameChecker implements Checkable {
+  check(s) {
+    // Parameter 's' implicitly has an 'any' type.
+    return s.toLowercase() === "ok";
+  }
+}
+```
+
+### `extends` Clauses
+
+- Classes may `extend` from a base class. A derived class has all the properties and methods of its base class, and als
 
 ## References
 
