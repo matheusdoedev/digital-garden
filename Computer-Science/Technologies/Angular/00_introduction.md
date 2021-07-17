@@ -16,3 +16,4 @@
 ## Resources
 
 - [Angular - Introduction to Angular concepts](https://angular.io/guide)
+- [Loiane Training](https://loiane.training)

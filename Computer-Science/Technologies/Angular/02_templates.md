@@ -34,3 +34,8 @@
 - Use short expressions
 - Quick execution
 - No visible side effects
+
+## References
+
+- [Angular IO](https://angular.io)
+- [Loiane Training](https://loiane.training)
