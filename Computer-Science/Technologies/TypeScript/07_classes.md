@@ -183,9 +183,230 @@ class NameChecker implements Checkable {
 
 ### `extends` Clauses
 
-- Classes may `extend` from a base class. A derived class has all the properties and methods of its base class, and als
+- Classes may `extend` from a base class. A derived class has all the properties and methods of its base class, and also define additional members.
+
+```ts
+class Animal {
+  move() {
+    console.log("Moving along!");
+  }
+}
+
+class Dog extends Animal {
+  woof(times: number) {
+    for (let i = 0; i < times; i++) {
+      console.log("woof!");
+    }
+  }
+}
+
+const d = new Dog();
+// Base class method
+d.move();
+// Derived class method
+d.woof(3);
+```
+
+#### Overriding Methods
+
+- A derived class can also override a base class field or property. You can use the `super.` syntax to access base class methods.
+- TypeScript enforces that a derived class is always a subtype of its base class.
+
+```ts
+class Base {
+  greet() {
+    console.log("Hello, world!);
+  }
+}
+
+class Derived extends Base {
+  greet(name?: string) {
+    if (name === undefined) {
+      super.greet();
+    } else {
+      console.log(`Hello, ${name.toUpperCase}`);
+    }
+  }
+}
+
+const d = new Derived();
+d.greet();
+d.greet("reader");
+```
+
+#### Initialization Order
+
+- The order that JavaScript classes initialize can be surprising in some cases.
+
+```ts
+class Base {
+  name = "base",
+  constructor() {
+    console.log("My name is " + this.name);
+  }
+}
+
+class Derived extends Base {
+  name = "derived";
+}
+
+// Prints "base", not "derived"
+const d = new Derived();
+```
+
+- The order of class initialization, as defined by JavaScript, is:
+  - The base class fields are initialized
+  - The base class constructor runs
+  - The derived class fields are initialized
+  - The derived class constructor runs
+
+## Member Visibility
+
+### `public`
+
+- The default visibility of class members is `public`. A `public` member can be accessed anywhere.
+
+### `protected`
+
+- `protected` members are only visible to subclasses of the class they're declared in.
+
+#### Exposure of `protected` members
+
+- Derived classes need to follow their base class contracts, but may choose to expose a subtype of base class with more capabilities. This includes making `protected` members `public`
+
+```ts
+class Base {
+  protected m = 10;
+}
+
+class Derived extends Base {
+  // No modifier, so default is 'public'
+  m = 15;
+}
+const d = new Derived();
+console.log(d.m); // OK
+```
+
+- Note that `Derived` was already able to freely read and write `m`, so this doesn't meaningfully alter the 'security' of this situation. The main thing to note here is that in the derived class, we need to be careful to repeat the `protected` modifier if this exposure isn't intentional.
+
+### `private`
+
+- `private` is like `protected`, but doesn't allow access to the member even from subclasses
+
+#### Cross-instance private access
+
+- TypeScript does allow cross-instance `private` access
+
+```ts
+class A {
+  private x = 10;
+
+  public sameAs(other: A) {
+    // No error
+    return other.x === this.x;
+  }
+}
+```
+
+#### Caveats
+
+- Like other aspects of TypeScript's type system, `private` and `protected` are only enforced during type checking. This means that JavaScript runtime constructs like `in` or simple property lookup can still access a `private` or `protected` member
+
+```ts
+class MySafe {
+  private secretKey = 12345;
+}
+```
+
+```js
+// In a JavaScript file...
+const s = new MySafe();
+// Will print 12345
+console.log(s.secretKey);
+```
+
+- If you need to protect values in your class from malicious actors, you should use mechanisms that offer hard runtime privacy,
+  such as closures, weak maps, or `private fields`.
+
+## Static Members
+
+- Classes may have `static` members. These members aren't associated with a particular instance of the class. They can be accessed through the class constructor object itself.
+
+```ts
+class MyClass {
+  static x = 0;
+  static printX() {
+    console.log(MyClass.x);
+  }
+}
+console.log(MyClass.x);
+MyClass.printX();
+```
+
+- Static members can also use the same `public`, `protected`, and `private` visibility modifiers
+
+```ts
+class MyClass {
+  private static x = 0;
+}
+console.log(MyClass.x);
+// Property 'x' is private and only accessible within class 'MyClass"
+```
+
+- Static members are also inherited
+
+```ts
+class Base {
+  static getGreeting() {
+    return "Hello World";
+  }
+}
+
+class Derived extends Base {
+  myGreeting = Derived.getGreeting();
+}
+```
+
+### Special Static Names
+
+- It's generally not safe/possible to overwrite properties from the `Function` prototype. Because classes are themselves functions that can be invoked with `new`, certain `static` names can't be used. Function properties like `name`, `length`, and `call` aren't valid to define as `static` members.
+
+## Generic Classes
+
+- Classes, much like interfaces, can be generic. When a generic class is instantiated with `new`, its type parameters are inferred the same way as in a function call
+
+```ts
+class Box<Type> {
+  contents: Type;
+  constructor(value: Type) {
+    this.contents = value;
+  }
+}
+
+const b = new Box("hello!");
+// const b: Box<string>
+```
+
+- Classes can use generic constraints and defaults the same way as interfaces.
+
+### Type Parameters in Static Members
+
+- This code isn't legal
+
+```ts
+class Box<Type> {
+  static defaultValue: Type;
+  // Static members cannot reference class type parameters
+}
+```
+
+- Remember that types are always fully erased! At runtime, there's only one `Box.defautValue` property slot. This means that setting `Box<string>.defaultValue` (if that were possible) would _also_ change `Box<number>.defaultValue` - not good. The `static` members of a generic class can never refer to the class's type parameters.
 
 ## References
 
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/2/basic-types.html#emitting-with-errors)
 - [Understanding TypeScript - 2021 Edition, Maximilian Schwarzmüller, Udemy](https://www.udemy.com/share/1013yQBUUdcFZaRnw=/)
+
+```
+
+```
